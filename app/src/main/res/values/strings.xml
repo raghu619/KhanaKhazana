@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">KhanaKhazana</string>
+    <string name="app_name2">Khana\nKhazana</string>
+
+    <string name="bookmarks">Bookmarks</string>
+
+    <!-- Paths -->
+    <string name="fontPath">fonts/dealers.otf</string>
+
+    <!-- Toast Messages -->
+    <string name="somethingGoneWrong">Something gone wrong!</string>
+    <string name="noDataFound">No data found, Try again later</string>
+    <string name="error_network">Cannot connect to Internet.Please check your connection!</string>
+    <string name="error_server">The server could not be found. Please try again after some time!</string>
+    <string name="error_parse">Parsing error! Please try again after some time!</string>
+    <string name="error_auth">Cannot connect to Internet.Please check your connection!</string>
+    <string name="error_timeout">Connection TimeOut!Please check your internet connection.</string>
+
+
+    <!--Labels-->
+    <string name="cast">Cast</string>
+    <string name="description">Description</string>
+    <string name="no_app_found">No app found to handle video</string>
+    <string name="no_link_found">No link of video found</string>
+    <string name="loading">Loading&#8230;</string>
+    <string name="videos">videos</string>
+    <string name="space">\u0020</string>
+    <string name="colon">:</string>
+    <string name="choose_recipe">Choose recipe \nthat interest you</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="expand">Expand</string>
+    <string name="collapse">Collapse</string>
+    <string name="step">Step</string>
+    <string name="no_video_found">No video link found</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="configure">Configure</string>
+
+
+</resources>
