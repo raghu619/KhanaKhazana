@@ -2,7 +2,6 @@ package com.example.navoki.khanakhazana.database;
 
 import android.arch.persistence.room.TypeConverter;
 
-import com.example.navoki.khanakhazana.models.IngredientsModel;
 import com.example.navoki.khanakhazana.models.VideoStepModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -17,14 +16,12 @@ public class VideoStepsConvertor {
 
     @TypeConverter
     public static String encode(List<VideoStepModel> list) {
-
         Gson gson = new Gson();
         return gson.toJson(list);
     }
 
     @TypeConverter
     public static List<VideoStepModel> decode(String value) {
-
         Gson gson = new Gson();
         Type listType = new TypeToken<List<VideoStepModel>>() {
         }.getType();

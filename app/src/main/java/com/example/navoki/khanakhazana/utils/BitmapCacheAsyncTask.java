@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class BitmapCacheAsyncTask extends AsyncTask<File, File, File> {
 
     private String videoPath;
-    private final ThreadLocal<ImageView> imageView = new ThreadLocal<ImageView>();
+    private final ThreadLocal<ImageView> imageView = new ThreadLocal<>();
 
     public synchronized static void retriveVideoFrameFromVideo(String videoPath, ImageView imageView) {
         BitmapCacheAsyncTask asyncTask = new BitmapCacheAsyncTask();
@@ -30,7 +30,7 @@ public class BitmapCacheAsyncTask extends AsyncTask<File, File, File> {
     @Override
     protected File doInBackground(File... files) {
         MediaMetadataRetriever mediaMetadataRetriever = null;
-        Bitmap bitmap = null;
+        Bitmap bitmap;
         File file = null;
 
         try {
@@ -54,14 +54,9 @@ public class BitmapCacheAsyncTask extends AsyncTask<File, File, File> {
                     Utils.scaleDown(bitmap, file);
                 }
             }
-        } catch (
-                IOException e)
-
-        {
+        } catch (IOException e) {
             e.printStackTrace();
-        } finally
-
-        {
+        } finally {
             if (mediaMetadataRetriever != null) {
                 mediaMetadataRetriever.release();
             }

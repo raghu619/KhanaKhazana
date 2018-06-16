@@ -1,23 +1,15 @@
 package com.example.navoki.khanakhazana.adapters;
 
-import android.animation.Animator;
-import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.navoki.khanakhazana.R;
 import com.example.navoki.khanakhazana.models.IngredientsModel;
-import com.example.navoki.khanakhazana.models.VideoStepModel;
-import com.example.navoki.khanakhazana.utils.ExpandableHeightGridView;
 
 import java.util.List;
 
@@ -31,12 +23,10 @@ public class IngredientsAdpater
     private final Context context;
     private final List<IngredientsModel> ingredientsList;
 
-
     public IngredientsAdpater(@NonNull Context context, List<IngredientsModel> ingredientsList) {
         this.ingredientsList = ingredientsList;
         this.context = context;
     }
-
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -61,7 +51,6 @@ public class IngredientsAdpater
         return ingredientsList.size();
     }
 
-
     class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.name)
         TextView name;
@@ -71,5 +60,4 @@ public class IngredientsAdpater
             ButterKnife.bind(this, view);
         }
     }
-
 }

@@ -20,7 +20,6 @@ import butterknife.ButterKnife;
 
 public class SplashActivity extends AppCompatActivity {
 
-
     @BindView(R.id.title)
     TextView title;
 
@@ -41,14 +40,13 @@ public class SplashActivity extends AppCompatActivity {
             openHomePage();
         }
     }
-
     private void openHomePage() {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
-                intent.putExtra(AppConstants.ARG_FROM_SPLASH,true);
+                intent.putExtra(AppConstants.ARG_FROM_SPLASH, true);
                 Utils.finishEntryAnimation(SplashActivity.this, intent);
                 finish();
             }

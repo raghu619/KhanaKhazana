@@ -3,7 +3,6 @@ package com.example.navoki.khanakhazana.adapters;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,7 +14,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.navoki.khanakhazana.R;
@@ -23,13 +21,11 @@ import com.example.navoki.khanakhazana.interfaces.OnAdapterClickListener;
 import com.example.navoki.khanakhazana.models.IngredientsModel;
 import com.example.navoki.khanakhazana.models.VideoStepModel;
 import com.example.navoki.khanakhazana.utils.BitmapCacheAsyncTask;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 
 public class StepsAdapter
         extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -39,8 +35,7 @@ public class StepsAdapter
     private final List<VideoStepModel> videoStepList;
     private final int HEADER = 0;
     private final int ITEM = 1;
-    private OnAdapterClickListener listener;
-
+    private final OnAdapterClickListener listener;
 
     public StepsAdapter(Context context, List<IngredientsModel> ingredientsList, List<VideoStepModel> videoStepList) {
         this.context = context;
@@ -60,7 +55,6 @@ public class StepsAdapter
                     .inflate(R.layout.item_foods_steps, parent, false);
             return new StepsHolder(view);
         }
-
         return null;
     }
 
@@ -91,7 +85,7 @@ public class StepsAdapter
                     if (ingredientsHolder.recyclerView.getVisibility() == View.GONE) {
                         ingredientsHolder.txt_toggle.setText(context.getString(R.string.collapse));
                         ingredientsHolder.recyclerView.animate().alpha(1f).start();
-                        expand(ingredientsHolder.recyclerView,ingredientsHolder.txt_toggle);
+                        expand(ingredientsHolder.recyclerView);
                     } else {
                         ingredientsHolder.txt_toggle.setText(context.getString(R.string.expand));
                         ingredientsHolder.recyclerView.animate().alpha(0f).start();
@@ -119,11 +113,9 @@ public class StepsAdapter
             //Thumbnail download of videos and cache it
             BitmapCacheAsyncTask.retriveVideoFrameFromVideo(videoStepList.get(pos).getVideoURL(), stepsHolder.img_step_thumb);
         }
-
         Animation animation = AnimationUtils.loadAnimation(context,
                 R.anim.anim_from_bottom);
         holder.itemView.startAnimation(animation);
-
     }
 
     @Override
@@ -180,10 +172,10 @@ public class StepsAdapter
     }
 
 
-    private void expand(View view,TextView txt_toggle) {
+    private void expand(View view) {
         //set Visible
         view.setVisibility(View.VISIBLE);
-       
+
         final int widthSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         final int heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         view.measure(widthSpec, heightSpec);
@@ -196,7 +188,6 @@ public class StepsAdapter
         final int finalHeight = view.getHeight();
 
         ValueAnimator mAnimator = slideAnimator(view, finalHeight, 0);
-
         mAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
@@ -218,7 +209,6 @@ public class StepsAdapter
             public void onAnimationRepeat(Animator animation) {
 
             }
-
         });
         mAnimator.start();
     }

@@ -1,12 +1,10 @@
 package com.example.navoki.khanakhazana.activities;
 
 import android.app.ProgressDialog;
-import android.appwidget.AppWidgetManager;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -15,7 +13,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,12 +27,10 @@ import com.example.navoki.khanakhazana.adapters.RecipeListAdapter;
 import com.example.navoki.khanakhazana.database.AppDatabase;
 import com.example.navoki.khanakhazana.database.RecipeListViewModel;
 import com.example.navoki.khanakhazana.interfaces.OnAdapterClickListener;
-import com.example.navoki.khanakhazana.models.IngredientsModel;
 import com.example.navoki.khanakhazana.models.RecipesModel;
 import com.example.navoki.khanakhazana.utils.AppConstants;
 import com.example.navoki.khanakhazana.utils.Globle;
 import com.example.navoki.khanakhazana.utils.Utils;
-import com.example.navoki.khanakhazana.widget.IngredientWidget;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -141,7 +136,7 @@ public class HomeActivity extends AppCompatActivity implements OnAdapterClickLis
         model.getListLiveData().observe(HomeActivity.this, observer);
     }
 
-    Observer<List<RecipesModel>> observer = new Observer<List<RecipesModel>>() {
+    final Observer<List<RecipesModel>> observer = new Observer<List<RecipesModel>>() {
         @Override
         public void onChanged(@Nullable List<RecipesModel> list) {
             if (list != null) {
@@ -166,37 +161,10 @@ public class HomeActivity extends AppCompatActivity implements OnAdapterClickLis
             Intent intent = new Intent(context, ItemListActivity.class);
             Utils.finishEntryAnimation(context, intent);
         } else {
-            saveData(context, recipesList.get(pos));
+            global.saveRecipeName(context, recipesList.get(pos).getName());
+            global.saveIngredients(context, recipesList.get(pos).getIngredients());
+            ((AppCompatActivity) context).finish();
+            ((AppCompatActivity) context).overridePendingTransition(R.anim.anim_slide_in_from_left, R.anim.anim_slide_out_to_right);
         }
     }
-
-    public static void saveData(Context context, RecipesModel model) {
-        SharedPreferences.Editor prefs = context.getSharedPreferences(AppConstants.SP_NAME, 0).edit();
-        Gson gson = new Gson();
-        String res = gson.toJson(model.getIngredients());
-
-        Log.e("GSOn", res);
-        prefs.putString(AppConstants.SP_INGREDIENTS, res);
-        prefs.putString(AppConstants.SP_RECIPE_NAME, model.getName());
-        prefs.apply();
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-      //  IngredientWidget.updateAppWidget(context, appWidgetManager,R.xml.ingredient_widget_info);
-
-        ((AppCompatActivity) context).finish();
-        ((AppCompatActivity) context).overridePendingTransition(R.anim.anim_slide_in_from_left, R.anim.anim_slide_out_to_right);
-    }
-
-    public static String getRecipeName(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(AppConstants.SP_NAME, 0);
-        return prefs.getString(AppConstants.SP_RECIPE_NAME, AppConstants.NOT_AVAILABLE);
-    }
-
-    public static List<IngredientsModel> getIngredients(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(AppConstants.SP_NAME, 0);
-        Gson gson = new Gson();
-        Type listType = new TypeToken<ArrayList<IngredientsModel>>() {
-        }.getType();
-        return gson.fromJson(prefs.getString(AppConstants.SP_INGREDIENTS, AppConstants.NOT_AVAILABLE), listType);
-    }
-
 }

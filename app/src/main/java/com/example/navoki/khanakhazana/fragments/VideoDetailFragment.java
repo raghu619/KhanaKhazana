@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,10 +39,9 @@ import butterknife.Unbinder;
 
 public class VideoDetailFragment extends Fragment {
 
-    public int pos = -1;
-    public VideoStepModel model;
-    public SimpleExoPlayer mExoPlayer;
-    public Globle globle;
+    private int pos = -1;
+    private VideoStepModel model;
+    private SimpleExoPlayer mExoPlayer;
     Unbinder unbinder;
 
     @BindView(R.id.toolbar)
@@ -68,13 +66,11 @@ public class VideoDetailFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        globle = Globle.getAppInstance();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         pos = getArguments().getInt(AppConstants.ARG_VIDEO_STEP, -1);
         if (pos != -1) {
             model = Globle.getAppInstance().getRecipesModel().getSteps().get(pos);
@@ -101,7 +97,6 @@ public class VideoDetailFragment extends Fragment {
             img_sad_chef.setVisibility(View.VISIBLE);
             txt_no_video.setVisibility(View.VISIBLE);
         }
-
         return rootView;
     }
 

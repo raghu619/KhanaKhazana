@@ -47,8 +47,7 @@ public class ItemListActivity extends AppCompatActivity implements OnAdapterClic
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         context = this;
-        Globle globle = Globle.getAppInstance();
-        recipesModel = globle.getRecipesModel();
+        recipesModel = Globle.getAppInstance().getRecipesModel();
 
         if (findViewById(R.id.item_detail_container) != null) {
             mTwoPane = true;

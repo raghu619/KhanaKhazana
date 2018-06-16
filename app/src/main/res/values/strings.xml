@@ -2,8 +2,6 @@
     <string name="app_name">KhanaKhazana</string>
     <string name="app_name2">Khana\nKhazana</string>
 
-    <string name="bookmarks">Bookmarks</string>
-
     <!-- Paths -->
     <string name="fontPath">fonts/dealers.otf</string>
 
@@ -16,12 +14,7 @@
     <string name="error_auth">Cannot connect to Internet.Please check your connection!</string>
     <string name="error_timeout">Connection TimeOut!Please check your internet connection.</string>
 
-
     <!--Labels-->
-    <string name="cast">Cast</string>
-    <string name="description">Description</string>
-    <string name="no_app_found">No app found to handle video</string>
-    <string name="no_link_found">No link of video found</string>
     <string name="loading">Loading&#8230;</string>
     <string name="videos">videos</string>
     <string name="space">\u0020</string>
@@ -32,9 +25,5 @@
     <string name="collapse">Collapse</string>
     <string name="step">Step</string>
     <string name="no_video_found">No video link found</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
-    <string name="configure">Configure</string>
-
 
 </resources>

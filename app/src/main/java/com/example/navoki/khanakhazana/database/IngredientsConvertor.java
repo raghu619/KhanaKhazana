@@ -16,14 +16,12 @@ public class IngredientsConvertor {
 
     @TypeConverter
     public static String encode(List<IngredientsModel> list) {
-
         Gson gson = new Gson();
         return gson.toJson(list);
     }
 
     @TypeConverter
     public static List<IngredientsModel> decode(String value) {
-
         Gson gson = new Gson();
         Type listType = new TypeToken<List<IngredientsModel>>() {
         }.getType();

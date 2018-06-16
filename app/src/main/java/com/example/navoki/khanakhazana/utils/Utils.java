@@ -16,7 +16,6 @@ import com.android.volley.TimeoutError;
 import com.example.navoki.khanakhazana.R;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -24,7 +23,7 @@ import java.io.IOException;
 /**
  * Created by Shivam Srivastava on 6/5/2018.
  */
-public class Utils {
+public final class Utils {
 
     public static void showError(Exception error, Context context) {
         String message = null;
@@ -56,20 +55,6 @@ public class Utils {
         activity.overridePendingTransition(R.anim.anim_slide_in_from_right, R.anim.anim_slide_out_to_left);
     }
 
-    /**
-     * Animation with
-     * Exit current Activity- SlideOut to Right
-     * Entry new Activity- SlideIn from Left
-     *
-     * @param context
-     */
-    public static void finishExitAnimation(Context context, Intent intent) {
-        AppCompatActivity activity = (AppCompatActivity) context;
-        activity.startActivity(intent);
-        activity.overridePendingTransition(R.anim.anim_slide_in_from_left, R.anim.anim_slide_out_to_right);
-        activity.finish();
-    }
-
     //Check internet connection
     public static boolean checkConnection(Context context) {
         final ConnectivityManager connectivityManager =
@@ -78,7 +63,6 @@ public class Utils {
         return connectivityManager.getActiveNetworkInfo() != null &&
                 (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected() ||
                         connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnected());
-
     }
 
     public static void scaleDown(Bitmap realImage, File file) {
@@ -87,7 +71,6 @@ public class Utils {
         options.inJustDecodeBounds = false;
         options.inPreferredConfig = Bitmap.Config.RGB_565;
         options.inDither = true;
-        //Bitmap realImage = BitmapFactory.decodeFile(realFile, options);
         int width = realImage.getWidth();
         int height = realImage.getHeight();
         float bitmapRatio = (float) width / (float) height;
@@ -100,19 +83,15 @@ public class Utils {
         }
         realImage = Bitmap.createScaledBitmap(realImage, width, height, true);
 
-
         try {
             FileOutputStream fOut = new FileOutputStream(file);
-            realImage.compress(Bitmap.CompressFormat.JPEG, 100, fOut); // saving the Bitmap to a file compressed as a JPEG with 85% compression rate
-            fOut.flush(); // Not really required
-            fOut.close(); // do not forget to close the stream
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            realImage.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+            fOut.flush();
+            fOut.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
         if (!realImage.isRecycled())
             realImage.recycle();
     }
-
 }
