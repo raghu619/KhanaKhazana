@@ -25,5 +25,7 @@
     <string name="collapse">Collapse</string>
     <string name="step">Step</string>
     <string name="no_video_found">No video link found</string>
+    <string name="no_recipe_selected">Click to select recipe</string>
+    <string name="swipe_to_see_steps">Swipe left, see steps</string>
 
 </resources>

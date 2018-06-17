@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.navoki.khanakhazana">
+    package="com.navoki.khanakhazana">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -32,20 +32,21 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activities.VideoDetailActivity"
-            android:configChanges="orientation|screenSize|layoutDirection"
             android:parentActivityName=".activities.ItemListActivity"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.navoki.khanakhazana.activities.ItemListActivity" />
+                android:value="com.navoki.khanakhazana.activities.ItemListActivity" />
         </activity>
 
         <receiver
             android:name=".widget.BakingWidgetProvider"
-            android:icon="@drawable/logo">
+            android:icon="@drawable/logo"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE_OPTION" />
+                <action android:name="com.navoki.khanakhazana.DATA_UPDATE" />
             </intent-filter>
 
             <meta-data
