@@ -32,13 +32,12 @@ public class ItemLisActivityPortraitTest {
     public ActivityTestRule<ItemListActivity> mActivityTestRule = new ActivityTestRule<>(ItemListActivity.class);
 
 
+    // Opening VideoPage with some dummy data
     @Before
     public void intentWithStubbedNoteId() {
 
-
         Globle globle = Globle.getAppInstance();
         globle.setRecipesModel(prepareData());
-        // Lazily start the Activity from the ActivityTestRule this time to inject the start Intent
         Intent startIntent = new Intent();
         mActivityTestRule.launchActivity(startIntent);
 

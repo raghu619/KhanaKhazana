@@ -36,6 +36,7 @@ public class SplashPermissionTest {
     }
 
 
+    // Checked if permission is there it will create folder, or delete id already exist
     @Test
     public void sdcardTest() {
 

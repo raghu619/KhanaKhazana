@@ -42,7 +42,6 @@ public class HomeActivityTest {
             e.printStackTrace();
         }
 
-
         onView(withId(R.id.recipeRecycle)).check(matches(isDisplayed()));
     }
 

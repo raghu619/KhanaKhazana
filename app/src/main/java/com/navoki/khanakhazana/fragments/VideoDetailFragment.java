@@ -59,6 +59,8 @@ public class VideoDetailFragment extends Fragment {
     TextView txt_no_video;
     @BindView(R.id.img_sad_chef)
     ImageView img_sad_chef;
+    @BindView(R.id.img_thumb)
+    ImageView img_thumb;
 
     private long seekTo = 0;
     private boolean isPlaying = false;
@@ -99,7 +101,8 @@ public class VideoDetailFragment extends Fragment {
         rootView.startAnimation(animation);
         mPlayerView.setDefaultArtwork(BitmapFactory.decodeResource(getResources(), R.drawable.placeholder_video));
 
-        if (model.getVideoURL().equals(AppConstants.NOT_AVAILABLE)) {
+        if (model.getThumbnailURL().equals(AppConstants.NOT_AVAILABLE)
+                && model.getVideoURL().equals(AppConstants.NOT_AVAILABLE)) {
             img_sad_chef.setVisibility(View.VISIBLE);
             txt_no_video.setVisibility(View.VISIBLE);
         }
@@ -153,7 +156,7 @@ public class VideoDetailFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if ((Util.SDK_INT <=  Build.VERSION_CODES.M || mExoPlayer == null)) {
+        if ((Util.SDK_INT <= Build.VERSION_CODES.M || mExoPlayer == null)) {
             initializePlayer(Uri.parse(model.getVideoURL()));
         }
     }
@@ -164,7 +167,7 @@ public class VideoDetailFragment extends Fragment {
         getCurrentData();
         pausePlayer();
         onFragmentListener.onFragmentRecreate(seekTo, isPlaying);
-        if (Util.SDK_INT <=  Build.VERSION_CODES.M) {
+        if (Util.SDK_INT <= Build.VERSION_CODES.M) {
             releasePlayer();
         }
     }
@@ -172,7 +175,7 @@ public class VideoDetailFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        if (Util.SDK_INT >  Build.VERSION_CODES.M) {
+        if (Util.SDK_INT > Build.VERSION_CODES.M) {
             releasePlayer();
         }
     }
