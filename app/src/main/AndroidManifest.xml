@@ -48,7 +48,6 @@
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE_OPTION" />
                 <action android:name="com.navoki.khanakhazana.DATA_UPDATE" />
             </intent-filter>
-
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/ingredient_widget_info" />

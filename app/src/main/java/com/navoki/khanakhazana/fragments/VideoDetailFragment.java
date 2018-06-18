@@ -83,8 +83,10 @@ public class VideoDetailFragment extends Fragment {
         if (pos != -1) {
             model = Globle.getAppInstance().getRecipesModel().getSteps().get(pos);
         }
-        seekTo = globle.getBundle().getLong(AppConstants.VID_SEEKTO, 0);
-        isPlaying = globle.getBundle().getBoolean(AppConstants.VID_IS_PLAYING, false);
+        if (globle.getBundle() != null) {
+            seekTo = globle.getBundle().getLong(AppConstants.VID_SEEKTO, 0);
+            isPlaying = globle.getBundle().getBoolean(AppConstants.VID_IS_PLAYING, false);
+        }
     }
 
     @Override
@@ -124,9 +126,10 @@ public class VideoDetailFragment extends Fragment {
         }
     }
 
-    private void getCurrentData() {
+    private void saveCurrentVideoState() {
         seekTo = mExoPlayer.getContentPosition();
         isPlaying = mExoPlayer.getPlayWhenReady();
+        onFragmentListener.onFragmentRecreate(seekTo, isPlaying);
     }
 
     private void releasePlayer() {
@@ -163,9 +166,8 @@ public class VideoDetailFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        getCurrentData();
+        saveCurrentVideoState();
         pausePlayer();
-        onFragmentListener.onFragmentRecreate(seekTo, isPlaying);
         if (Util.SDK_INT <= Build.VERSION_CODES.M) {
             releasePlayer();
         }
@@ -183,12 +185,6 @@ public class VideoDetailFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-        releasePlayer();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        releasePlayer();
-    }
 }

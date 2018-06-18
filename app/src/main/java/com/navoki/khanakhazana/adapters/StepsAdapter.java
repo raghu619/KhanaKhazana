@@ -21,6 +21,7 @@ import com.navoki.khanakhazana.interfaces.OnAdapterClickListener;
 import com.navoki.khanakhazana.models.IngredientsModel;
 import com.navoki.khanakhazana.models.VideoStepModel;
 import com.navoki.khanakhazana.utils.BitmapCacheAsyncTask;
+import com.navoki.khanakhazana.utils.Globle;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -35,14 +36,17 @@ public class StepsAdapter
     private final Context context;
     private final List<IngredientsModel> ingredientsList;
     private final List<VideoStepModel> videoStepList;
+    private final boolean mTwoPane;
     private final int HEADER = 0;
     private final int ITEM = 1;
     private final OnAdapterClickListener listener;
 
-    public StepsAdapter(Context context, List<IngredientsModel> ingredientsList, List<VideoStepModel> videoStepList) {
+    public StepsAdapter(Context context, List<IngredientsModel> ingredientsList, List<VideoStepModel> videoStepList
+            , boolean mTwoPane) {
         this.context = context;
         this.ingredientsList = ingredientsList;
         this.videoStepList = videoStepList;
+        this.mTwoPane = mTwoPane;
         listener = (OnAdapterClickListener) context;
     }
 
@@ -63,7 +67,7 @@ public class StepsAdapter
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         // show first video by default
-        if (position == 0 && videoStepList.size()>0)
+        if (position == 0 && videoStepList.size() > 0 && mTwoPane)
             listener.onItemClick(position, null);
 
         if (holder instanceof IngredientsHolder) {
@@ -112,6 +116,7 @@ public class StepsAdapter
             stepsHolder.container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Globle.getAppInstance().setBundle(null);
                     listener.onItemClick(pos, null);
                 }
             });
@@ -232,7 +237,6 @@ public class StepsAdapter
     private ValueAnimator slideAnimator(final View view, int start, int end) {
 
         ValueAnimator animator = ValueAnimator.ofInt(start, end);
-
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {

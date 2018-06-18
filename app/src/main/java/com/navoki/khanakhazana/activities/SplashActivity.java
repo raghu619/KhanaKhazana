@@ -51,7 +51,7 @@ public class SplashActivity extends AppCompatActivity {
                 Utils.finishEntryAnimation(SplashActivity.this, intent);
                 finish();
             }
-        }, 2000);
+        }, 1500);
     }
 
     @Override

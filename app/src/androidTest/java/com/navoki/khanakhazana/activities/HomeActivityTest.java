@@ -37,6 +37,7 @@ public class HomeActivityTest {
     public void splashActivityTest() {
 
         try {
+            // because of slow emulator made 10sec delay
             Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();

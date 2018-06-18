@@ -9,6 +9,7 @@ import com.navoki.khanakhazana.R;
 import com.navoki.khanakhazana.fragments.VideoDetailFragment;
 import com.navoki.khanakhazana.interfaces.OnFragmentListener;
 import com.navoki.khanakhazana.utils.AppConstants;
+import com.navoki.khanakhazana.utils.Globle;
 
 
 public class VideoDetailActivity extends AppCompatActivity implements OnFragmentListener {
@@ -55,6 +56,19 @@ public class VideoDetailActivity extends AppCompatActivity implements OnFragment
 
     @Override
     public void onFragmentRecreate(long seekTo, boolean isPlaying) {
+        Bundle bundle = new Bundle();
+        bundle.putLong(AppConstants.VID_SEEKTO, seekTo);
+        bundle.putBoolean(AppConstants.VID_IS_PLAYING, isPlaying);
+        Globle.getAppInstance().setBundle(bundle);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }

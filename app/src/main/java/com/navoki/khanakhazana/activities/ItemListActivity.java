@@ -56,7 +56,7 @@ public class ItemListActivity extends AppCompatActivity implements OnAdapterClic
 
         if (null != recipesModel) {
             setTitle(recipesModel.getName());
-            final StepsAdapter adapter = new StepsAdapter(context, recipesModel.getIngredients(), recipesModel.getSteps());
+            final StepsAdapter adapter = new StepsAdapter(context, recipesModel.getIngredients(), recipesModel.getSteps(), mTwoPane);
 
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -90,7 +90,7 @@ public class ItemListActivity extends AppCompatActivity implements OnAdapterClic
 
         if (mTwoPane) {
 
-            Globle.getAppInstance().setBundle(new Bundle());
+            //  Globle.getAppInstance().setBundle(null);
 
             Bundle bundle = new Bundle();
             bundle.putInt(AppConstants.ARG_VIDEO_STEP, pos);
@@ -113,5 +113,15 @@ public class ItemListActivity extends AppCompatActivity implements OnAdapterClic
         bundle.putLong(AppConstants.VID_SEEKTO, seekTo);
         bundle.putBoolean(AppConstants.VID_IS_PLAYING, isPlaying);
         Globle.getAppInstance().setBundle(bundle);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }

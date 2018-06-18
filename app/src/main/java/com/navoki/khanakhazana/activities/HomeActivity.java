@@ -149,7 +149,7 @@ public class HomeActivity extends AppCompatActivity implements OnAdapterClickLis
     final Observer<List<RecipesModel>> observer = new Observer<List<RecipesModel>>() {
         @Override
         public void onChanged(@Nullable List<RecipesModel> list) {
-            if (list != null) {
+            if (list.size()>0) {
                 recipesList = new ArrayList<>();
                 recipesList.addAll(list);
                 populateList();
