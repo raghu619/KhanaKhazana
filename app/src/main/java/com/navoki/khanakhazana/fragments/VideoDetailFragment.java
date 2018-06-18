@@ -59,8 +59,7 @@ public class VideoDetailFragment extends Fragment {
     TextView txt_no_video;
     @BindView(R.id.img_sad_chef)
     ImageView img_sad_chef;
-    @BindView(R.id.img_thumb)
-    ImageView img_thumb;
+
 
     private long seekTo = 0;
     private boolean isPlaying = false;
